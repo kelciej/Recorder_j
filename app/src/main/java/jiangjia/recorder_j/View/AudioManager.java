@@ -1,5 +1,6 @@
 package jiangjia.recorder_j.View;
 
+import android.content.Context;
 import android.media.MediaRecorder;
 
 import java.io.File;
@@ -16,6 +17,8 @@ public class AudioManager {
     private String mCurrentFilePath;
     private static AudioManager Instance;
     private boolean isPrepared=false;
+
+    private Context context;
 
     public AudioManager(String dir){
         this.mDir=dir;
@@ -59,7 +62,9 @@ public class AudioManager {
 
             String filename=getFileName();
             File file=new File(dir,filename);
+
             mCurrentFilePath=file.getAbsolutePath();
+
 
             mediaRecorder = new MediaRecorder();
             mediaRecorder.setOutputFile(file.getAbsolutePath());

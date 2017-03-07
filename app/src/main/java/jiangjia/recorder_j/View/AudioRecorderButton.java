@@ -46,7 +46,6 @@ public class AudioRecorderButton extends Button implements AudioManager.AudioSta
         {
             System.out.println("SDcard err!");
         }
-        System.out.println("dir"+dir);
         mAudioManager=AudioManager.getInstance(dir);//实例化
         mAudioManager.setOnAudioStateListener(this);
         setOnLongClickListener(new OnLongClickListener() {
@@ -81,8 +80,6 @@ public class AudioRecorderButton extends Button implements AudioManager.AudioSta
             while(isRecording) {
                 try {
                     Thread.sleep(100);
-                    System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhh");
-
                     mTime += 0.1f;
                     handler.sendEmptyMessage(MSG_VOICE_CHANGED);
                 } catch (InterruptedException e) {
@@ -146,8 +143,6 @@ public class AudioRecorderButton extends Button implements AudioManager.AudioSta
                         return super.onTouchEvent(event);
                     }
                     if (!isRecording||mTime<0.6f) {
-
-                        System.out.println("sssssssssssssssssssssssssssssssss");
                         mDialogManager.tooShort();
                         if(mAudioManager!=null) //应该加上这个判断，不然有可能mAudioManage未创建完成
                         {
