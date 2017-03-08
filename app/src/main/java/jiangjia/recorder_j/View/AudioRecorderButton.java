@@ -8,6 +8,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 import jiangjia.recorder_j.R;
 
 /**
@@ -44,7 +46,8 @@ public class AudioRecorderButton extends Button implements AudioManager.AudioSta
         if (!Environment.getExternalStorageState().equals(
                 android.os.Environment.MEDIA_MOUNTED))
         {
-            System.out.println("SDcard err!");
+            Toast.makeText(context, "SD加载出错",
+                    Toast.LENGTH_SHORT).show();
         }
         mAudioManager=AudioManager.getInstance(dir);//实例化
         mAudioManager.setOnAudioStateListener(this);

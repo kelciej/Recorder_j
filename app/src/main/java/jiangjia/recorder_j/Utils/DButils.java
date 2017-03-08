@@ -22,7 +22,8 @@ public class DButils extends SQLiteOpenHelper {
     private final static String TABLE_NAME = "AudioFile";
     private final static String CREATE_TBL = "create table if not exists AudioFile(AudioID integer primary key autoincrement, " +
             "AudioPath varchar(50), " +
-            "AudioTime timestamp DEFAULT(datetime('now', 'localtime')))";
+            "AudioTime timestamp DEFAULT(datetime('now', 'localtime')), "+
+            "AudioDuration float)";
     private SQLiteDatabase db;
 
     //SQLiteOpenHelper子类必须要的一个构造函数
@@ -60,34 +61,9 @@ public class DButils extends SQLiteOpenHelper {
     public void insert(ContentValues values){
         //获取SQLiteDatabase实例
         SQLiteDatabase db = getWritableDatabase();
-        db.beginTransaction();
-        try{
-
-            if(db.insert(TABLE_NAME, null, values)==-1)
-            {
-
-                throw new Exception();
-
-            }  db.setTransactionSuccessful();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally{
-            db.endTransaction();
-        }
         //插入数据库中
-       // db.insert(TABLE_NAME, null, values);
-
+        db.insert(TABLE_NAME, null, values);
         System.out.println("插入成共");
-        db.close();
-    }
-    //插入方法
-    public void insert(String values){
-        //获取SQLiteDatabase实例
-        SQLiteDatabase db = getWritableDatabase();
-        //db.execSQL("insert into "+TABLE_NAME+"(AudioPath) values('"+values+"')");
-        //插入数据库中
-        db.execSQL("insert into audiofile(audiopath) values(?)",new String[]{values});
-        System.out.println("插入成共=============");
         db.close();
     }
 

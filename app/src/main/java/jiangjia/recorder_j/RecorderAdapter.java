@@ -53,7 +53,7 @@ public class RecorderAdapter extends ArrayAdapter<Recorder> {
         }
 
         //设置时间宽度
-        holder.seconds.setText(Math.round(getItem(position).time)+"\"");
+        holder.seconds.setText(Math.round(getItem(position).time)+"\"");//求距离某数最近的整数（可能比某数大，也可能比它小）,返回int型或者long型（上一个函数返回double型）
         ViewGroup.LayoutParams lp=holder.length.getLayoutParams();
         lp.width=(int)(mMinItemWidth+(mMaxItemWidth/60f*getItem(position).time));
         return convertView;

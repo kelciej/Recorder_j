@@ -1,6 +1,7 @@
 package jiangjia.recorder_j;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.TintTypedArray;
@@ -12,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import jiangjia.recorder_j.View.History;
 
 /**
  * Created by KelceiJ on 2017/3/7.
@@ -46,11 +50,27 @@ public class LetToolBar extends Toolbar {
             if (leftIcon != null) {
                 setLeftButtonIcon(leftIcon);
             }
+            //设置点击事件
+            setLeftButtonOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getContext(),"left",Toast.LENGTH_SHORT).show();
+                }
+            });
 
             final Drawable rightIcon = a.getDrawable(R.styleable.LetToolBar_rightButtonIcon);
             if (rightIcon != null) {
                 setRightButtonIcon(rightIcon);
             }
+            //设置点击事件
+            setRightButtonOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getContext(), "right", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(getContext(), History.class);
+                    getContext().startActivity(intent);
+                }
+            });
             //资源的回收
             a.recycle();
         }
@@ -121,12 +141,12 @@ public class LetToolBar extends Toolbar {
     }
 
     //设置右侧按钮监听事件
-    public void setRightButtonOnClickLinster(OnClickListener linster) {
+    public void setRightButtonOnClickListener(OnClickListener linster) {
         mRightButton.setOnClickListener(linster);
     }
 
     //设置左侧按钮监听事件
-    public void setLeftButtonOnClickLinster(OnClickListener linster) {
+    public void setLeftButtonOnClickListener(OnClickListener linster) {
         mLeftButton.setOnClickListener(linster);
     }
 

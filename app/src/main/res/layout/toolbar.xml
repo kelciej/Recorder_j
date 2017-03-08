@@ -4,6 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <ImageButton
+        android:id="@+id/toolbar_leftbutton"
+        android:layout_width="20dp"
+        android:textColor="#ffffff"
+        android:background="@mipmap/ic_previous"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="0dp"
+        android:layout_height="20dp" />
+
     <TextView
         android:id="@+id/toolbar_title"
         android:layout_width="wrap_content"
@@ -11,32 +21,23 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:textColor="#ffffff"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:text="微信语音"
         />
 
     <ImageButton
-        android:id="@+id/toolbar_leftbutton"
-        android:layout_width="25dp"
-        android:textColor="#ffffff"
-        android:background="@mipmap/ic_previous"
-        android:layout_height="25dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
-
-    <ImageButton
         android:id="@+id/toolbar_rightbutton"
-        android:layout_width="30dp"
         android:textColor="#ffffff"
         android:background="@mipmap/ic_more"
-        android:layout_height="10dp"
+        android:layout_height="5dp"
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="10dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_width="25dp" />
 
 </RelativeLayout>

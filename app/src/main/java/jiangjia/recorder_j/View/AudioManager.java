@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 /**
- * Created by KelceiJ on 2017/3/7.
+ * Created by KelcieJ on 2017/3/7.
  */
 
 public class AudioManager {

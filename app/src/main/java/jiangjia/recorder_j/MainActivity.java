@@ -1,6 +1,5 @@
 package jiangjia.recorder_j;
 
-import android.content.ContentValues;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -16,7 +15,7 @@ import com.idescout.sql.SqlScoutServer;
 import java.util.ArrayList;
 import java.util.List;
 
-import jiangjia.recorder_j.Utils.DButils;
+import jiangjia.recorder_j.FileManager.MyRunnable;
 import jiangjia.recorder_j.View.AudioRecorderButton;
 import jiangjia.recorder_j.View.MediaManager;
 
@@ -36,11 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         SqlScoutServer.create(this, getPackageName());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mListView = (ListView) findViewById(R.id.id_listview);
         toolbar = (LetToolBar) findViewById(R.id.toolbar);
         //toolbar.hideTitleView();
@@ -51,17 +48,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish(float seconds, String filePath) {
                 Recorder recorder = new Recorder(seconds, filePath);
-                audioFilePath = filePath;
-                DButils dButils = new DButils(MainActivity.this);
-                ContentValues values = new ContentValues();
-                values.put("AudioPath", audioFilePath);
-                dButils.insert(values);
+                MyRunnable insertDBRunnabl=new MyRunnable(seconds,MainActivity.this,filePath);
+                new Thread(insertDBRunnabl).start();
                 mDatas.add(recorder);
                 mAdapter.notifyDataSetChanged();
                 mListView.setSelection(mDatas.size() - 1);//定位到最后一行
             }
         });
-
 
         mAdapter = new RecorderAdapter(this, mDatas);
         mListView.setAdapter(mAdapter);

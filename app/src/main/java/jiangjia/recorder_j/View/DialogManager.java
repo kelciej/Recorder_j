@@ -87,10 +87,8 @@ public class DialogManager {
     public void updateVoiceLevel(int level){
         //switch使代码太过冗余
         if(mDialog!=null&&mDialog.isShowing()){
-            System.out.println("---level--"+level);
             int resId=mContext.getResources().getIdentifier("v"+level,
                     "drawable",mContext.getPackageName());
-            System.out.println("---resId+"+resId);
             mVoice.setImageResource(resId);
         }
     }
