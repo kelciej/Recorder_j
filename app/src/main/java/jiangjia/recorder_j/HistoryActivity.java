@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -33,9 +32,6 @@ import jiangjia.recorder_j.View.MediaManager;
 public class HistoryActivity extends AppCompatActivity {
 
     private ListView mListView;
-    private ArrayAdapter<AudioEntity> mAdapter;
-    //private List<AudioEntity> mDatas = new ArrayList<AudioEntity>();
-    private String audioFilePath;
     private Toolbar toolbar;
     private View mAnimView;
 
@@ -43,8 +39,6 @@ public class HistoryActivity extends AppCompatActivity {
     private Context mContext;
     private int mMinItemWidth;
     private int mMaxItemWidth;
-
-    private LayoutInflater mInflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,5 +175,3 @@ public class HistoryActivity extends AppCompatActivity {
         }
     }
 }
-//        mAdapter = new HistoryAdapter(this, mDatas);
-//        mListView.setAdapter(mAdapter);
