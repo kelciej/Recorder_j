@@ -81,10 +81,10 @@ public class HistoryActivity extends AppCompatActivity {
                 }, (String) mDatas.get(position).get("AudioFilePath"));
             }
         });
-
     }
 
     private List<Map<String, Object>> getData() {
+
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Map<String, Object> map = new HashMap<String, Object>();
 

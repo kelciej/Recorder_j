@@ -29,15 +29,12 @@ public class MainActivity extends AppCompatActivity {
     private ListView mListView;
     private ArrayAdapter<AudioEntity> mAdapter;
     private List<AudioEntity> mDatas = new ArrayList<AudioEntity>();
-    private String audioFilePath;
 
     private AudioRecorderButton mAudioRecordButtun;
     private Toolbar toolbar;
-    private Menu menu;
 
     //确保当前只有一个音频在播放，将mAnimView设为成员变量
     private View mAnimView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mListView = (ListView) findViewById(R.id.id_listview);
         toolbar= (Toolbar) findViewById(R.id.id_toolbar);
-        //toolbar.setNavigationIcon(R.mipmap.ic_previous);  // 设置导航栏图标
         setSupportActionBar(toolbar);   // 设置Toolbar支持ActionBar的一些属性
 
         mAudioRecordButtun = (AudioRecorderButton) findViewById(R.id.id_recorder_button);
