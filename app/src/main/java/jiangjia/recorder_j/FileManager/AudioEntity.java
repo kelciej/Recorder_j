@@ -12,7 +12,12 @@ public class AudioEntity {
     public float AudioDuration;
     public AudioEntity() {
     }
+    public AudioEntity(float _time, String _filePath){
 
+        super();
+        this.AudioDuration=_time;
+        this.filePath=_filePath;
+    }
     public String getFilePath() {
         return filePath;
     }

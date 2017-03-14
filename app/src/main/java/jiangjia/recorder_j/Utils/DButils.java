@@ -37,7 +37,7 @@ public class DButils extends SQLiteOpenHelper {
         this(context, name, null, version);
     }
 
-    //数据库的构造函数，传递一个参数的， 数据库名字和版本号都写死了
+    //数据库的构造函数，传递一个参数的
     public DButils(Context context){
         this(context, DB_NAME, null, VERSION);
     }
@@ -108,8 +108,6 @@ public class DButils extends SQLiteOpenHelper {
             {
                 String time = c.getString(c.getColumnIndex("AudioTime"));
                 String temp=time.substring(0,time.indexOf(" "));//获得完整的 日期
-                //time=temp.substring(temp.length()-5,temp.length());
-                String ii;
                 if(i==0)
                 {
                     list.add(temp);
@@ -131,12 +129,9 @@ public class DButils extends SQLiteOpenHelper {
         List<AudioEntity> AEList=new ArrayList<>();
         try{
             SQLiteDatabase db = getWritableDatabase();
-           // String sql = "SELECT * FROM AudioFile where AudioTime>=?"+
-           //         "and AudioTime<=? order by AudioTime desc";
             String sql = "SELECT * FROM AudioFile where DATE(AudioTime)= DATE(?)"+
                     " order by AudioTime desc";
             Cursor c = db.rawQuery(sql,new String[] { begintime+"T" });
-            //Cursor c = db.rawQuery(sql, new String[] { begintime, endtime});
             if(c!=null)
             {
                 while(c.moveToNext())

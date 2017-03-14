@@ -34,6 +34,7 @@ public class HistoryActivity extends AppCompatActivity {
     private ListView mListView;
     private Toolbar toolbar;
     private View mAnimView;
+    private HistoryAdapter adapter;
 
     private List<Map<String, Object>> mDatas;
     private Context mContext;
@@ -53,7 +54,7 @@ public class HistoryActivity extends AppCompatActivity {
 
 
         mDatas = getData();
-        HistoryAdapter adapter = new HistoryAdapter(this);
+        adapter = new HistoryAdapter(this);
         mListView = (ListView) findViewById(R.id.id_history_listview);
         mListView.setAdapter(adapter);
 
@@ -174,4 +175,5 @@ public class HistoryActivity extends AppCompatActivity {
             return convertView;
         }
     }
+
 }

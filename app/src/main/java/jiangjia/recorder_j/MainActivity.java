@@ -19,6 +19,7 @@ import com.idescout.sql.SqlScoutServer;
 import java.util.ArrayList;
 import java.util.List;
 
+import jiangjia.recorder_j.FileManager.AudioEntity;
 import jiangjia.recorder_j.FileManager.MyRunnable;
 import jiangjia.recorder_j.View.AudioRecorderButton;
 import jiangjia.recorder_j.View.MediaManager;
@@ -26,8 +27,8 @@ import jiangjia.recorder_j.View.MediaManager;
 public class MainActivity extends AppCompatActivity {
 
     private ListView mListView;
-    private ArrayAdapter<Recorder> mAdapter;
-    private List<Recorder> mDatas = new ArrayList<Recorder>();
+    private ArrayAdapter<AudioEntity> mAdapter;
+    private List<AudioEntity> mDatas = new ArrayList<AudioEntity>();
     private String audioFilePath;
 
     private AudioRecorderButton mAudioRecordButtun;
@@ -54,10 +55,11 @@ public class MainActivity extends AppCompatActivity {
         mAudioRecordButtun.setAudioFinishRecorderListener(new AudioRecorderButton.AudioFinishRecorderListener() {
             @Override
             public void onFinish(float seconds, String filePath) {
-                Recorder recorder = new Recorder(seconds, filePath);
+                AudioEntity audioEntity = new AudioEntity(seconds, filePath);
+
                 MyRunnable insertDBRunnabl=new MyRunnable(seconds,MainActivity.this,filePath);
                 new Thread(insertDBRunnabl).start();
-                mDatas.add(recorder);
+                mDatas.add(audioEntity);
                 mAdapter.notifyDataSetChanged();
                 mListView.setSelection(mDatas.size() - 1);//定位到最后一行
             }

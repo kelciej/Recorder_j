@@ -11,19 +11,21 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import jiangjia.recorder_j.FileManager.AudioEntity;
+
 /**
  * Created by jiangjia on 17/3/3.
  */
 
-public class RecorderAdapter extends ArrayAdapter<Recorder> {
-    private List<Recorder> mDatas;
+public class RecorderAdapter extends ArrayAdapter<AudioEntity> {
+    private List<AudioEntity> mDatas;
     private Context mContext;
     private int mMinItemWidth;
     private int mMaxItemWidth;
 
     private LayoutInflater mInflater;
 
-    public RecorderAdapter(Context context, List<Recorder> objects) {
+    public RecorderAdapter(Context context, List<AudioEntity> objects) {
         super(context, -1, objects);
         mContext=context;
         mDatas=objects;
@@ -53,9 +55,9 @@ public class RecorderAdapter extends ArrayAdapter<Recorder> {
         }
 
         //设置时间宽度
-        holder.seconds.setText(Math.round(getItem(position).time)+"\"");//求距离某数最近的整数（可能比某数大，也可能比它小）,返回int型或者long型（上一个函数返回double型）
+        holder.seconds.setText(Math.round(getItem(position).AudioDuration)+"\"");//求距离某数最近的整数（可能比某数大，也可能比它小）,返回int型或者long型（上一个函数返回double型）
         ViewGroup.LayoutParams lp=holder.length.getLayoutParams();
-        lp.width=(int)(mMinItemWidth+(mMaxItemWidth/60f*getItem(position).time));
+        lp.width=(int)(mMinItemWidth+(mMaxItemWidth/60f*getItem(position).AudioDuration));
         return convertView;
     }
 
