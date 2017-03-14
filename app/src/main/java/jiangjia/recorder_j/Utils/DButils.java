@@ -63,7 +63,7 @@ public class DButils extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         //插入数据库中
         db.insert(TABLE_NAME, null, values);
-        System.out.println("插入成共");
+        System.out.println("插入成功");
         db.close();
     }
 
@@ -96,15 +96,47 @@ public class DButils extends SQLiteOpenHelper {
         }
     }
 
+    public List<String> queryCalendar(){
+        List<String> list=new ArrayList<String>();
+        SQLiteDatabase db = getWritableDatabase();
+        String sql = "SELECT AudioTime FROM AudioFile";
+        Cursor c = db.rawQuery(sql,null);
+        if(c!=null)
+        {
+            int i=0;
+            while(c.moveToNext())
+            {
+                String time = c.getString(c.getColumnIndex("AudioTime"));
+                String temp=time.substring(0,time.indexOf(" "));//获得完整的 日期
+                //time=temp.substring(temp.length()-5,temp.length());
+                String ii;
+                if(i==0)
+                {
+                    list.add(temp);
+                    i++;
+                }
+                else if(!temp.equals(list.get(i-1))){//或者前一个数和本身不同，加入列表，减少冗余
+                    list.add(temp);
+                    i++;
+                }
+            }
+            c.close();
+        }
+        return list;
+    }
+
     //查找数据
-    public List<AudioEntity> findbydate(String begintime,String endtime)
+    public List<AudioEntity> findbydate(String begintime)
     {
         List<AudioEntity> AEList=new ArrayList<>();
         try{
             SQLiteDatabase db = getWritableDatabase();
-            String sql = "SELECT * FROM AudioFile where AudioTime>=?"+
-                    "and AudioTime<?";
-            Cursor c = db.rawQuery(sql, new String[] { String.valueOf(begintime), String.valueOf(endtime) });
+           // String sql = "SELECT * FROM AudioFile where AudioTime>=?"+
+           //         "and AudioTime<=? order by AudioTime desc";
+            String sql = "SELECT * FROM AudioFile where DATE(AudioTime)= DATE(?)"+
+                    " order by AudioTime desc";
+            Cursor c = db.rawQuery(sql,new String[] { begintime+"T" });
+            //Cursor c = db.rawQuery(sql, new String[] { begintime, endtime});
             if(c!=null)
             {
                 while(c.moveToNext())
@@ -113,9 +145,11 @@ public class DButils extends SQLiteOpenHelper {
                     int AudioID = c.getInt(c.getColumnIndex("AudioID"));
                     String AudioPath=c.getString(c.getColumnIndex("AudioPath"));
                     String AudioTime=c.getString(c.getColumnIndex("AudioTime"));
+                    float AudioDuration=c.getFloat(c.getColumnIndex("AudioDuration"));
                     a.setFilePath(AudioPath);
                     a.setAudioID(AudioID);
                     a.setTime(AudioTime);
+                    a.setAudioDuration(AudioDuration);
                     AEList.add(a);
                 }
                 c.close();

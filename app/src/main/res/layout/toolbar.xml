@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageButton
-        android:id="@+id/toolbar_leftbutton"
-        android:layout_width="20dp"
-        android:textColor="#ffffff"
-        android:background="@mipmap/ic_previous"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="0dp"
-        android:layout_height="20dp" />
+    android:layout_height="wrap_content"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    android:id="@+id/id_toolbar">
 
     <TextView
         android:id="@+id/toolbar_title"
@@ -24,20 +18,6 @@
         android:layout_marginTop="10dp"
         android:textColor="#ffffff"
         android:textSize="24sp"
-        android:text="微信语音"
         />
-
-    <ImageButton
-        android:id="@+id/toolbar_rightbutton"
-        android:textColor="#ffffff"
-        android:background="@mipmap/ic_more"
-        android:layout_height="5dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_width="25dp" />
-
-</RelativeLayout>
+    
+</android.support.v7.widget.Toolbar>

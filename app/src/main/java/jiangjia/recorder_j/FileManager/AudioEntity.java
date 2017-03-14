@@ -1,10 +1,15 @@
 package jiangjia.recorder_j.FileManager;
 
 /**
- * Created by KelceiJ on 2017/3/7.
+ * Created by KelcieJ on 2017/3/7.
  */
 
 public class AudioEntity {
+
+    public String filePath;
+    public String time;
+    int AudioID;
+    public float AudioDuration;
     public AudioEntity() {
     }
 
@@ -16,7 +21,6 @@ public class AudioEntity {
         this.filePath = filePath;
     }
 
-    private String filePath;
 
     public String getTime() {
         return time;
@@ -26,8 +30,6 @@ public class AudioEntity {
         this.time = time;
     }
 
-    private String time;
-
     public int getAudioID() {
         return AudioID;
     }
@@ -36,5 +38,13 @@ public class AudioEntity {
         AudioID = audioID;
     }
 
-    private int AudioID;
+    public float getAudioDuration() {
+        return AudioDuration;
+    }
+
+    public void setAudioDuration(float audioDuration) {
+        AudioDuration = audioDuration;
+    }
+
+
 }

@@ -1,11 +1,15 @@
 package jiangjia.recorder_j;
 
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AudioRecorderButton mAudioRecordButtun;
     private Toolbar toolbar;
+    private Menu menu;
 
     //确保当前只有一个音频在播放，将mAnimView设为成员变量
     private View mAnimView;
@@ -35,13 +40,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         SqlScoutServer.create(this, getPackageName());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mListView = (ListView) findViewById(R.id.id_listview);
-        toolbar = (LetToolBar) findViewById(R.id.toolbar);
-        //toolbar.hideTitleView();
-
+        toolbar= (Toolbar) findViewById(R.id.id_toolbar);
+        //toolbar.setNavigationIcon(R.mipmap.ic_previous);  // 设置导航栏图标
+        setSupportActionBar(toolbar);   // 设置Toolbar支持ActionBar的一些属性
 
         mAudioRecordButtun = (AudioRecorderButton) findViewById(R.id.id_recorder_button);
         mAudioRecordButtun.setAudioFinishRecorderListener(new AudioRecorderButton.AudioFinishRecorderListener() {
@@ -83,6 +90,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.tool_bar_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.id_history:
+                Intent intent=new Intent(MainActivity.this, CircleCalendarActivity.class);
+                startActivity(intent);
+                return true;
+
+            default:    // 如果用户的行为没有被执行，则会调用父类的方法去处理，建议保留。
+                return super.onOptionsItemSelected(item);
+        }
+    }
     protected void onPause() {
         super.onPause();
         MediaManager.pause();
